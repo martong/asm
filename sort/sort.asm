@@ -43,6 +43,26 @@ loop:
     jnz loop
     ret
 
+; char* f(char* range, size_t len)
+; rdi: pointer to range of bytes
+; rsi: len of range
+find_smallest_in_range:
+    mov r15b, [rdi] ; first element's value
+    mov rax, rdi ; first element
+loop2:
+    mov r14b, [rdi]
+    cmp r14b, r15b
+    jge greater_or_eq
+    ; less
+    mov r15b, [rdi]
+    mov rax, rdi ; first element
+greater_or_eq:
+    ; loop end
+    inc rdi
+    dec rsi
+    jnz loop2
+    ret
+
 start:
     mov     rax, 0x2000004 ; write
     mov     rdi, 1 ; stdout
@@ -57,6 +77,13 @@ start:
     mov rdi, x
     mov rsi, 5
     call loop_over_range
+
+    call newline
+    mov rdi, x
+    mov rsi, 5
+    call find_smallest_in_range
+    mov rdi, rax
+    call display_one_digit
 
     mov     rax, 0x2000001 ; exit
     mov     rdi, 0
