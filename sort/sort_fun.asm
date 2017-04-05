@@ -1,5 +1,5 @@
 global _find_smallest_in_range
-global _sort
+global _asm_selection_sort
 
 section .text
 
@@ -24,10 +24,10 @@ greater_or_eq:
     ret
 
 
-; void sort(char* range, size_t len)
+; void asm_selection_sort(char* range, size_t len)
 ; rdi: pointer to range of bytes
 ; rsi: len of range
-_sort:
+_asm_selection_sort:
 loop3:
     push rdi
     push rsi

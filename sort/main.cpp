@@ -14,7 +14,7 @@
 
 extern "C" {
 char* find_smallest_in_range(char* range, size_t len);
-void sort(char* range, size_t len);
+void asm_selection_sort(char* range, size_t len);
 }
 
 void test_find_smallest_in_range() {
@@ -51,13 +51,13 @@ std::ostream& operator<<(std::ostream& os, const std::vector<char>& v) {
 void test_sort() {
     {
         char a[] = {2, 1};
-        sort(a,2);
+        asm_selection_sort(a,2);
         ASSERT(a[0] == 1);
         ASSERT(a[1] == 2);
     }
     {
         char a[] = {3, 2, 1};
-        sort(a,3);
+        asm_selection_sort(a,3);
         ASSERT(a[0] == 1);
         ASSERT(a[1] == 2);
         ASSERT(a[2] == 3);
@@ -73,7 +73,7 @@ void test_sort() {
         std::cout << vec;
 
         auto vec2 = vec;
-        sort(&vec2[0], vec2.size());
+        asm_selection_sort(&vec2[0], vec2.size());
         std::cout << vec2;
 
         std::sort(vec.begin(), vec.end());
