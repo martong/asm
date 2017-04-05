@@ -1,4 +1,5 @@
 global _find_smallest_in_range
+global _sort
 
 section .text
 
@@ -21,4 +22,28 @@ greater_or_eq:
     dec rsi
     jnz loop2
     ret
+
+
+; void sort(char* range, size_t len)
+; rdi: pointer to range of bytes
+; rsi: len of range
+_sort:
+loop3:
+    push rdi
+    push rsi
+    call _find_smallest_in_range
+    mov r15b, [rax] ;smallest value
+    pop rsi
+    pop rdi
+
+    ; swap
+    mov r14b, [rdi] ;vale at the beginning
+    mov [rdi], r15b
+    mov [rax], r14b
+
+    inc rdi
+    dec rsi
+    jnz loop3
+    ret
+
 

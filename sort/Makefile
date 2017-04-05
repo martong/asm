@@ -1,7 +1,7 @@
 sort_fun.o: sort_fun.asm
 	/usr/local/bin/nasm -f macho64 sort_fun.asm
 main.o: main.cpp
-	clang++ -g -c main.cpp
+	clang++ -g -std=c++14 -c main.cpp
 sort_cpp: sort_fun.o main.o
 	clang++ -g main.o sort_fun.o -o sort_cpp
 
